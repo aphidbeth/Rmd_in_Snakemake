@@ -10,7 +10,7 @@ The goal of this snakemake pipeline is to make a plot using an Rscript (make_plo
 
 1. Create two conda enviroments: one for snakemake and one for R.
 ```
-conda create -n my_snakemake_env snakemake
+conda create -n my_snakemake_env snakemake=8.4.12
 
 conda create -n my_r_env r-base=4.3.3 r-tiff=0.1_12 r-dt=0.33 r-tidyverse=2.0.0 r-markdown=1.12
 
@@ -25,14 +25,17 @@ git clone https://github.com/aphidbeth/Rmd_in_Snakemake
 3. Edit the config file and runner script filepaths
 Change these to the location of your Rmd_in_snakemake folder.
 ```
-sed -e "MY-BASE-PATH" <your-base-path> snakefiles/config.yaml
+current_file_path=MY-BASE-PATH
+new_file_path=<your-file-path> # change this to your filepath eg. "mnt/scratch/Rmd_in_Snakemake"
 
-sed -e "MY-BASE-PATH" <your-base-path> run_rmd.sh
+sed -i 's+${current_file_path}+${new_file_path}+g' snakefiles/config.yaml
+
+sed -i 's+${current_file_path}+${new_file_path}+g' run_rmd.sh
 
 ```
   
 ## Run the pipeline
-The pipeline can be run by submitting a shell script that runs the smk pipeline. This allows editing of the memory requirements.
+The pipeline can be run by submitting a shell script that runs the smk pipeline.
 ```
 sbatch run_rmd.sh
 ```
