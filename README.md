@@ -1,5 +1,7 @@
 # Rmd_in_Snakemake
-Example of running Rmarkdown in a snakemake pipeline. This is only tested on the crop diversity HPC at James Hutton Institute (Dundee, UK) and may not work in other environments. It assumes conda is being used as the package manager and snakemake is run via the slurm scheduler. 
+Example of running Rmarkdown in a snakemake pipeline. 
+
+This is only tested on the crop diversity HPC at James Hutton Institute (Dundee, UK) and may not work in other environments. It assumes conda is being used as the package manager and snakemake is run via the slurm scheduler. 
 
 ## Overview
 The goal of this snakemake pipeline is to make a plot using an Rscript (make_plot.R) and then output a html report using Rmarkdown. The snakemake pipeline has two rules to do this: 
@@ -39,4 +41,6 @@ The pipeline can be run by submitting a shell script that runs the smk pipeline.
 sbatch run_rmd.sh
 ```
 
+## Notes
 
+There is capacity to run Rmarkdown scripts using the ***script:*** directive in snakemake rules instead of ***shell:***. However, I had difficulty defining the output location of the html using this method as snakemake objects are not accessible in the yaml header of a snakefile. The only option I could get to work was to render the markdown file within shell. This requires passing any snakemake parameters to rmarkdown through a list inside rmarkdown::render(). A corresponding parameters needs to be listed in the yaml header of the markdown file with a placeholder variable. 
