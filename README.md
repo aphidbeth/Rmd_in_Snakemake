@@ -28,9 +28,9 @@ Change these to the location of your Rmd_in_snakemake folder.
 current_file_path=MY-BASE-PATH
 new_file_path=<your-file-path> # change this to your filepath eg. "mnt/scratch/Rmd_in_Snakemake"
 
-sed -i 's+${current_file_path}+${new_file_path}+g' snakefiles/config.yaml
+sed -i 's#MY-BASE-PATH#<new_file_path>#' snakefiles/config.yaml
 
-sed -i 's+${current_file_path}+${new_file_path}+g' run_rmd.sh
+sed -i 's#MY-BASE-PATH#<new_file_path>#' run_rmd.sh
 
 ```
   
