@@ -25,8 +25,7 @@ git clone https://github.com/aphidbeth/Rmd_in_Snakemake
 3. Edit the config file and runner script filepaths
 Change these to the location of your Rmd_in_snakemake folder.
 ```
-current_file_path=MY-BASE-PATH
-new_file_path=<your-file-path> # change this to your filepath eg. "mnt/scratch/Rmd_in_Snakemake"
+# change your filepath to the location of the scratch folder eg. "mnt/scratch/username/Rmd_in_Snakemake"
 
 sed -i 's#MY-BASE-PATH#<new_file_path>#' snakefiles/config.yaml
 
