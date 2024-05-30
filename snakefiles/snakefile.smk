@@ -13,7 +13,7 @@ rule make_plot:
     output: 
         a_plot= "{base_path}/outputs/a_plot.tiff"
     params:
-        script_path= "base_path}/scripts"
+        script_path= "{base_path}/scripts"
     log: 
         log_file= "{base_path}/logs/make_plot.log"
     conda:
