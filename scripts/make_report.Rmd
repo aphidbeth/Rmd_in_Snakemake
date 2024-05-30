@@ -1,0 +1,49 @@
+---
+title: "Test Report"
+output: html_document
+
+params:
+  log: "x"
+  plot: "x"
+
+---
+
+```{r logfile, echo=F}
+# This helps capture standard erros from the Rscript to a log
+log <- file(params$log, open = "wt")
+sink(log)
+sink(log, type = "message")
+```
+
+## Test rmarkdown document
+
+```{r setup, include=FALSE}
+library(grid) 
+library(tiff) # allows us to embed our tiff plots
+library(DT) # allows us to plot a nice table
+library(tidyverse)
+```
+
+## Dataset
+
+Here we present a subset of the mtcars dataset:
+```{r make_table, cols.print=5, rows.print=20, rownames.print=F, echo=F}
+# print just the total, filtered, percentage, merging and duplication
+
+subset <- mtcars %>% select(vs, am, gear, carb) 
+
+datatable(subset, class = 'cell-border stripe')
+```
+
+## Plots
+
+Here we present a plot rendered in the rmd code:
+
+```{r inrmd_plot, echo=FALSE}
+ggplot(mtcars, aes(x=mpg, y=hp)) + geom_point()
+```
+
+Here we load a pre-made plot through the params:
+```{r load_plot, echo=FALSE}
+grid::grid.raster( tiff::readTIFF(params$plot)) 
+```

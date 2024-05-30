@@ -1,0 +1,7 @@
+# DIRECTORIES
+
+scratch_dir: "MY-BASE-PATH"
+
+
+# CONDA ENV
+conda_r_env: "my_r_env"
